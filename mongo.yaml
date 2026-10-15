@@ -3,19 +3,19 @@ services:
   mongodb:
     image: mongo
     ports:
-      - "27017:27017"
+      - "${MONGO_PORT:-27017}:${MONGO_PORT:-27017}"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-password}
     volumes:
       - mongo-data:/data/db
 
   mongo-express:
     image: mongo-express
     ports:
-      - "8081:8081"
+      - "${MONGO_EXPRESS_PORT:-8081}:${MONGO_EXPRESS_PORT:-8081}"
     environment:
-      - ME_CONFIG_MONGODB_URL=mongodb://admin:password@mongodb:27017/
+      - ME_CONFIG_MONGODB_URL=mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-password}@${MONGO_HOST:-mongodb}:${MONGO_PORT:-27017}/
     depends_on:
       - mongodb
     restart: on-failure
@@ -23,18 +23,20 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "${PORT:-3000}:${PORT:-3000}"
     environment:
-      - PORT=3000
-      - MAX_PROFILES=6
-      - MONGO_USER=admin
-      - MONGO_PASSWORD=password
-      - MONGO_HOST=mongodb
-      - MONGO_PORT=27017
-      - DB_NAME=user-account
+      - PORT=${PORT:-3000}
+      - MAX_PROFILES=${MAX_PROFILES:-10}
+      - MONGO_USER=${MONGO_USER:-admin}
+      - MONGO_PASSWORD=${MONGO_PASSWORD:-password}
+      - MONGO_HOST=${MONGO_HOST:-mongodb}
+      - MONGO_PORT=${MONGO_PORT:-27017}
+      - DB_NAME=${DB_NAME:-user-account}
     depends_on:
       - mongodb
 
+
+# Database volume for persisting data
 volumes:
   mongo-data:
     # If I want to use data from an existing volume
