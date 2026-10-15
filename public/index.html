@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+
+<!-- Head section -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+
+
+<!-- Body section -->
+<body>
+
+  <!-- Profile view -->
+  <div class="container">
+    <div class="header-row">
+      <h1><u>User Profile</u></h1>
+      <select id="user-select" onchange="changeUser()"></select>
+    </div>
+    <div class="picker">
+      <img id="picture" alt="Profile Picture" width="200" height="200">
+    </div>
+    <hr>
+    <div class="container-info">
+      ▶ Name: <h4 id="name">Andrea Bazzoni</h4>
+    </div>
+    <hr>
+    <div class="container-info">
+      ▶ Email: <h4 id="email">andrea.bazzoni@example.com</h4>
+    </div>
+    <hr>
+    <div class="container-info">
+      ▶ Interests: <h4 id="interests">Coding</h4>
+    </div>
+    <hr>
+    <div class="container-button">
+      <button class="button" onclick="editProfile()">Edit Profile</button>
+    </div>
+  </div>
+
+  <!-- Edit view -->
+  <div class="container-edit">
+    <div class="header-row">
+      <h1><u>User Profile</u></h1>
+      <span id="edit-user-select">Profile 1</span>
+    </div>
+    <div class="picker">
+      <button type="button" class="arrow" onclick="changePicture(-1)">&#8249;</button>
+      <img id="edit-picture" alt="Profile Picture" width="200" height="200">
+      <button type="button" class="arrow" onclick="changePicture(1)">&#8250;</button>
+    </div>
+    <hr>
+    <div class="container-edit-info">
+      ▶ Name: <input id="input-name" type="text">
+    </div>
+    <hr>
+    <div class="container-edit-info">
+      ▶ Email: <input id="input-email" type="text">
+    </div>
+    <hr>
+    <div class="container-edit-info">
+      ▶ Interests: <input id="input-interests" type="text">
+    </div>
+    <hr>
+    <div class="container-button">
+      <button class="button" onclick="saveProfile()">Save Profile</button>
+      <button class="button" onclick="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+
+</body>
+
+
+</html>
